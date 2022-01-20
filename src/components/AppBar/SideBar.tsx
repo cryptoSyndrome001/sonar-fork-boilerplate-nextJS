@@ -10,11 +10,37 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import SettingIcon from '@mui/icons-material/Settings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { styled } from '@mui/system';
 
 import {
     useConnection,
     useWallet,
 } from '@solana/wallet-adapter-react';
+
+const SidebarButton = styled(Button)(({ theme }) => ({
+    width: "100%",
+    fontSize: 16,
+    fontWeight: 900,
+    borderRadius: 10,
+    textTransform: "uppercase",
+    padding: "10px 15px",
+    color: "#fff",
+    position: "relative",
+    fontFamily: "Open Sans",
+    borderBottom: "1px solid #00000052",
+    float: 'left',
+    display: 'block',
+    "& span": {
+        paddingLeft: 10,
+        textAlign: "left",
+        float: 'left',
+        marginLeft: 20,
+    },
+    "& i": {
+        float: 'left',
+        width: "30px !important"
+    }
+}));
 
 interface Props {
 
@@ -56,18 +82,21 @@ const SideBar = (props: Props) => {
 
             </Box>
             <Divider />
+
             <Box sx={{ p: 1 }}>
                 <Link href="#" underline="none" color="inherit">
-                    <Button style={{ height: "40px" }} color="inherit" disableElevation fullWidth startIcon={<DashboardIcon />}>
-                        Dashboard
-                    </Button>
+                    <SidebarButton>
+                        <i><DashboardIcon /></i>
+                        <span>Dashboard</span>
+                    </SidebarButton>
                 </Link>
             </Box>
             <Box sx={{ p: 1 }}>
                 <Link href="#" underline="none" color="inherit">
-                    <Button color="inherit" disableElevation fullWidth startIcon={<SettingIcon />}>
-                        Setting
-                    </Button>
+                    <SidebarButton>
+                        <i><SettingIcon /></i>
+                        <span>settings</span>
+                    </SidebarButton>
                 </Link>
             </Box>
         </div >
