@@ -76,7 +76,7 @@ export const Dashboard = (props: Props) => {
   let walletData: Array<Data>;
   const [apiData, setApidata] = React.useState([])
 
-  const [rowData, setrowData] = React.useState([])
+  const [rowData, setrowData] = React.useState([] as Data[])
   // if (walletAddress !== '') baseUrl = "http://92.38.130.111:443/wallet-tokens/".concat(walletAddress);
 
   const getData = async () => {
@@ -89,9 +89,9 @@ export const Dashboard = (props: Props) => {
     }
     let burl = '';
     if (props.searchAddress !== '') {
-      burl = baseUrl.concat(props.searchAddress);
+      burl = baseUrl + props.searchAddress;
     } else if (wallet.connected) {
-      burl = baseUrl.concat(walletAddress);
+      burl = baseUrl + walletAddress;
     }
     console.log(burl);
     console.log("start loading")
@@ -135,13 +135,14 @@ export const Dashboard = (props: Props) => {
     <>
       <h3>Net Worth</h3>
       <h4>
+        {(walletAddress === '' && props.searchAddress === '') && "$0.00"}
         {(walletAddress !== '' || props.searchAddress !== '') && rowData.length === 0 && "$0.00"}
         {
           (walletAddress !== '' || props.searchAddress !== '') &&
           rowData.length > 0 &&
           rowData.map((row, index) => {
             tB += row.amount * row.price;
-            if (index === rowData.length - 1) return "$".concat(tB.toFixed(2));
+            if (index === rowData.length - 1) return "$" + (tB.toFixed(2));
           })
         }
       </h4>
@@ -195,13 +196,14 @@ export const Dashboard = (props: Props) => {
                 Tokens
               </span>
               <span>
+                {(walletAddress === '' && props.searchAddress === '') && "$0.00"}
                 {(walletAddress !== '' || props.searchAddress !== '') && rowData.length === 0 && "$0.00"}
                 {
                   (walletAddress !== '' || props.searchAddress !== '') &&
                   rowData.length > 0 &&
                   rowData.map((row, index) => {
                     tB += row.amount * row.price;
-                    if (index === rowData.length - 1) return "$".concat(tB.toFixed(2));
+                    if (index === rowData.length - 1) return "$" + tB.toFixed(2);
                   })
                 }
               </span>
@@ -289,19 +291,19 @@ export const Dashboard = (props: Props) => {
                           <TableCell
                             align={'right'}
                             padding={'none'}>
-                            {row.amount !== 0 ? row.amount.toFixed(6) === 0.00 ? "<0.0000001" : row.amount.toFixed(6) : '-'}
+                            {row.amount !== 0 ? row.amount.toFixed(6) === '0.000000' ? "<0.000001" : row.amount.toFixed(6) : '-'}
                           </TableCell>
                           <TableCell
                             align={'right'}
                             padding={'none'}
                           >
-                            {"$".concat(row.price)}
+                            {"$" + (row.price)}
                           </TableCell>
                           <TableCell
                             align={'right'}
                             padding={'none'}
                           >
-                            {row.amount !== 0 ? "$".concat((row.amount * row.price).toFixed(2)) : '-'}
+                            {row.amount !== 0 ? "$" + (row.amount * row.price).toFixed(2) : '-'}
                           </TableCell>
                         </TableRow>
                       );

@@ -17,10 +17,17 @@ const MainPanel = (props: any) => {
         <>
             <Box
                 component="main"
-                sx={{ m: 3, flexGrow: 1, p: 3, width: { sm: `calc(100% - ${props.drawerWidth}px)` } }}
+                sx={{
+
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${props.drawerWidth}px)` },
+                    height: '100vh',
+                    overflow: 'auto',
+                }}
             >
-                <Toolbar />
-                <Container maxWidth="lg" sx={{ m: 4 }}>
+
+                <Container maxWidth="lg" sx={{ mt: 12 }}>
                     {/* <Typography paragraph>
                         <h3>Net Worth</h3>
                         <h4>$0.00</h4>
